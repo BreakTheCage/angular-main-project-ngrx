@@ -1,0 +1,30 @@
+=================================================
+4) Generate New Component By cli
+$ ng generate component my-component
+OR 
+$ ng g c my-component
+=================================================
+3) Inatall Bootstrap:
+$ npm install --save bootstrap@3
+* Change angular.json file
+old> "styles": [
+              "src/styles.css"
+            ],
+new> "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ],
+==================================================
+2) Run as second time:
+$ ng serve
+==================================================
+1) INSTALL ANGULAR:
+https://angular.io/guide/quickstart
+
+$ npm install -g @angular/cli@latest
+$ ng new my-app
+-> router? N
+-> css? css
+$ ng serve
+-->http://localhost:4200/
+===================================================
