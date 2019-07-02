@@ -1,0 +1,5 @@
+ng-course-project-recipe-book: 
+https://console.firebase.google.com/project/ng-course-recipe-book-546b8/database/ng-course-recipe-book-546b8/data
+
+firebase to get access:
+https://ng-course-recipe-book-546b8.firebaseio.com/
