@@ -1,7 +1,37 @@
 <div class="row">
-    <div class="col-xs-12">
-        <form>
-            <div class="form-group"></div>
+    <div class="col-xs-12 col-md-6 col-md-offset">
+        <form (ngSubmit)="onSubmit(authForm)" #authForm='ngForm'>
+            <h3>{{ isLoginMode? 'Login' : 'Signup' }}</h3>
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    ngModel
+                    name="email"
+                    required
+                    email
+                    class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    ngModel
+                    name="password"
+                    required
+                    minlength="6"
+                    class="form-control">
+            </div>
+            <div>
+                <button 
+                    class="btn btn-primary" 
+                    [disabled]="!authForm.valid"
+                    type="submit">{{ isLoginMode ? 'Login' : 'Sign Up' }}</button> | 
+                <button class="btn btn-primary" type="button" (click)="onSwitchMode()">Switch to {{isLoginMode ? 'Signup Mode' : 'Login Mode'}}</button>
+            </div>
+
         </form>
     </div>
 </div>
