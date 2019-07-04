@@ -3,3 +3,19 @@ https://console.firebase.google.com/project/ng-course-recipe-book-546b8/database
 
 firebase to get access:
 https://ng-course-recipe-book-546b8.firebaseio.com/
+
+
+Auth: Sign up and Sign in with email and password
+https://firebase.google.com/docs/reference/rest/auth
+
+Auth: Signup =>
+page:
+https://firebase.google.com/docs/reference/rest/auth#section-create-email-password
+Post Request:
+https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=[API_KEY]
+
+Project Api Key url:
+https://console.firebase.google.com/project/ng-course-recipe-book-546b8/settings/general/
+Api Key:
+AIzaSyCD8RYEELYYN4OzAvSLhkVI4Tm03S6miME
+
