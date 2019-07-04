@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-interface AuthResponseData {
-    kind:string ,
-    idToken: string ,
-    email: string ,
-    refreshToken: string ,
-    expiresIn: string ,
-    localId: string 
+export interface AuthResponseData {
+    kind:string ;
+    idToken: string ;
+    email: string ;
+    refreshToken: string ;
+    expiresIn: string ;
+    localId: string;
+    registered?: boolean ;
 }
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -41,7 +42,7 @@ export class AuthService {
 
     //https://firebase.google.com/docs/reference/rest/auth#section-sign-in-email-password
     login(email: string, password: string) {
-        this.http.post(
+        return this.http.post<AuthResponseData>(
             'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCD8RYEELYYN4OzAvSLhkVI4Tm03S6miME',
             { 
                 email: email,
