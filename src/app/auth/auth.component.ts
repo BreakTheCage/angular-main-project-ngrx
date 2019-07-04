@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService, AuthResponseData } from './auth.service';
 import { Observable } from 'rxjs';
@@ -11,7 +12,7 @@ export class AuthComponent {
     isLoginMode = false;
     isLoading = false;
     errorBanner: string = null;
-    constructor(private authService: AuthService){}
+    constructor(private authService: AuthService, private router: Router){}
 
     onSwitchMode() {
         this.isLoginMode = !this.isLoginMode;
@@ -26,29 +27,22 @@ export class AuthComponent {
         this.isLoading = true;
         let authObs: Observable<AuthResponseData>;
         if(this.isLoginMode) {
-            //...
-            this.authService.login(email, pass).subscribe(
-                resData => {
-                console.log('signup response: ', resData);
-                this.isLoading = false;
-                }, 
-                errorMessage => {
-                    console.log('signup error: ', errorMessage);
-                    this.errorBanner = errorMessage;
-                    this.isLoading = false;
-                });
+            authObs = this.authService.login(email, pass);
         } else {
-            this.authService.signup(email, pass).subscribe(
-                resData => {
+            authObs = this.authService.signup(email, pass);
+        }
+
+        authObs.subscribe(
+            resData => {
                 console.log('signup response: ', resData);
                 this.isLoading = false;
-                }, 
-                errorMessage => {
-                    console.log('signup error: ', errorMessage);
-                    this.errorBanner = errorMessage;
-                    this.isLoading = false;
-                });
-        }
+                this.router.navigate(['/recipes']);
+            }, 
+            errorMessage => {
+                console.log('signup error: ', errorMessage);
+                this.errorBanner = errorMessage;
+                this.isLoading = false;
+            })
         
         form.reset();
     }
