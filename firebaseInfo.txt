@@ -19,3 +19,6 @@ https://console.firebase.google.com/project/ng-course-recipe-book-546b8/settings
 Api Key:
 AIzaSyCD8RYEELYYN4OzAvSLhkVI4Tm03S6miME
 
+Auth Sign in:
+https://firebase.google.com/docs/reference/rest/auth#section-sign-in-email-password
+
