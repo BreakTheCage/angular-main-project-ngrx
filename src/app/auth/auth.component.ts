@@ -42,9 +42,14 @@ export class AuthComponent {
                 console.log('signup error: ', errorMessage);
                 this.errorBanner = errorMessage;
                 this.isLoading = false;
-            })
+            }
+        )
         
         form.reset();
+    }
+
+    onHandleError() {
+        this.errorBanner = null;
     }
 
 }
