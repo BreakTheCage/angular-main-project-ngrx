@@ -1,13 +1,14 @@
+<ng-template appPlaceholder></ng-template>
 <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset">
         <!-- <div class="alert alert-danger" *ngIf="errorBanner">
             <p>{{ errorBanner }}</p>
         </div> -->
-        <app-alert 
+        <!-- <app-alert 
             [message]="errorBanner" 
             *ngIf="errorBanner" 
-            (closeEvent)="onHandleError()"></app-alert>
-        <div *ngIf="isLoading" style="text-align: center">
+            (closeEvent)="onHandleError()"></app-alert> -->
+        <div *ngIf="isLoading" style="text-align: center"> 
             <app-loading-spinner></app-loading-spinner>
         </div>
         <form (ngSubmit)="onSubmit(authForm)" #authForm='ngForm' *ngIf="!isLoading">
