@@ -29,6 +29,7 @@ export class DataStorageService {
         )
         .pipe(
             map(recipes => {
+                console.log('@data-storage: Recipes line 32=>', recipes);
                 return recipes.map(recipe => {
                     return {... recipe, ingredients: recipe.ingredients ? recipe.ingredients : []}
                 })
