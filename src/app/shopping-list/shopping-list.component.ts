@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
 import { LoggingService } from '../logging.service';
+import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
@@ -11,24 +12,29 @@ import { LoggingService } from '../logging.service';
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   
-  ingredients: Ingredient[];
+  ingredients: Observable<{ingredients: Ingredient[]}> ;
   private subscription: Subscription;
-  constructor(private shoppingListService: ShoppingListService, private loggingService: LoggingService) { }
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private loggingService: LoggingService,
+    private store: Store<{shoppingList: {ingredients: Ingredient[]} }>
+  ) { }
   
   ngOnInit() {
-    this.ingredients = this.shoppingListService.getIngredients();
-    console.log('Ingredient: ', this.ingredients);
+    this.ingredients = this.store.select('shoppingList');
+    // this.ingredients = this.shoppingListService.getIngredients();
+    // console.log('Ingredient: ', this.ingredients);
 
-    this.subscription =  this.shoppingListService.ingredientChanged.subscribe((ingredients: Ingredient[]) => {
-      this.ingredients = ingredients;
-      console.log('Ingredient: ', this.ingredients);
-    });
+    // this.subscription =  this.shoppingListService.ingredientChanged.subscribe((ingredients: Ingredient[]) => {
+    //   this.ingredients = ingredients;
+    //   console.log('Ingredient: ', this.ingredients);
+    // });
 
     this.loggingService.printLog('Hello from ShoppingListComponent ngOnInit');
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
   onEditItem(index: number){
