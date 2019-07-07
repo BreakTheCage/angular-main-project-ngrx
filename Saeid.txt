@@ -1,3 +1,6 @@
+Build Mode of ng Project
+$ ng build --prod
+$ ng serve
 =================================================
 4) Generate New Component By cli
 $ ng generate component my-component
