@@ -1,3 +1,7 @@
+
+NgRx Install:
+$ npm install --save @ngrx/store
+=====================================================
 Installing Firebase:
 $ npm install -g firebase-tools
 $ firebase login
