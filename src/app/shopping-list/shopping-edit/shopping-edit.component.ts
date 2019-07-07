@@ -3,7 +3,6 @@ import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { generateExpandoInstructionBlock } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -11,7 +10,7 @@ import { generateExpandoInstructionBlock } from '@angular/core/src/render3/instr
   styleUrls: ['./shopping-edit.component.css']
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
-  @ViewChild('f') slForm: NgForm;
+  @ViewChild('f',{static: false}) slForm: NgForm;
   subscription: Subscription;
   editMode = false;
   edittedItemIndex: number;
