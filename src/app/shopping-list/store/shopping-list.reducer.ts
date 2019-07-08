@@ -8,9 +8,6 @@ export interface State {
     edittedIngredient: Ingredient;
     edittedIngredientIndex: number;
 }
-export interface AppState {
-    shoppingList: State;
-}
 
 
 const iState: State = {
