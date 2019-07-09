@@ -1,11 +1,14 @@
 import { Component, ViewChild, ComponentFactoryResolver, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { AuthService, AuthResponseData } from './auth.service';
 import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+
+import { AuthService, AuthResponseData } from './auth.service';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { PlaceholderDirectve } from '../shared/placeholder/placeholder.directive';
-
+import * as fromApp from '../store/app.reducer';
+import * as AuthActions from './store/auth.actions';
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html'
@@ -20,7 +23,8 @@ export class AuthComponent implements OnDestroy {
     constructor(
             private authService: AuthService, 
             private router: Router,
-            private componentFactoryResolver: ComponentFactoryResolver
+            private componentFactoryResolver: ComponentFactoryResolver,
+            private store: Store<fromApp.AppState>
             ){}
 
     onSwitchMode() {
@@ -36,7 +40,8 @@ export class AuthComponent implements OnDestroy {
         this.isLoading = true;
         let authObs: Observable<AuthResponseData>;
         if(this.isLoginMode) {
-            authObs = this.authService.login(email, pass);
+            // authObs = this.authService.login(email, pass);
+            this.store.dispatch(new AuthActions.LoginStart({email: email, password: pass}))
         } else {
             authObs = this.authService.signup(email, pass);
         }
