@@ -46,19 +46,23 @@ export class AuthComponent implements OnDestroy {
             authObs = this.authService.signup(email, pass);
         }
 
-        authObs.subscribe(
-            resData => {
-                console.log('signup response: ', resData);
-                this.isLoading = false;
-                this.router.navigate(['/recipes']);
-            }, 
-            errorMessage => {
-                console.log('signup error: ', errorMessage);
-                this.errorBanner = errorMessage;
-                this.showErrorAlert(errorMessage);
-                this.isLoading = false;
-            }
-        )
+        this.store.select('auth').subscribe(authState => {
+            
+        })
+
+        // authObs.subscribe(
+        //     resData => {
+        //         console.log('signup response: ', resData);
+        //         this.isLoading = false;
+        //         this.router.navigate(['/recipes']);
+        //     }, 
+        //     errorMessage => {
+        //         console.log('signup error: ', errorMessage);
+        //         this.errorBanner = errorMessage;
+        //         this.showErrorAlert(errorMessage);
+        //         this.isLoading = false;
+        //     }
+        // )
         
         form.reset();
     }
