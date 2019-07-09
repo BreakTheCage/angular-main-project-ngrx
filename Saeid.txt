@@ -1,4 +1,6 @@
-
+Inatal NgRx Effect:
+npm install --save @ngrx/effect
+====================================================
 NgRx Install:
 $ npm install --save @ngrx/store
 =====================================================
