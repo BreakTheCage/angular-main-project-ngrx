@@ -6,12 +6,12 @@ import { RecipeService } from './recipe.service';
 
 @Injectable({providedIn: 'root'})
 export class RecipesResolverService implements Resolve<Recipe[]> {
-    constructor(private dataStorageService: DataStorageService, private recipesService: RecipeService){}
-    //: Recipe[] | import("rxjs").Observable<Recipe[]> | Promise<Recipe[]>
+
+    constructor(private dataStorageService: DataStorageService, private recipesService: RecipeService) { }
+    
     resolve(route:ActivatedRouteSnapshot, state:RouterStateSnapshot) {
         const recipes = this.recipesService.getRecipes();
         if (recipes.length === 0) {
-            //resolver will subscribe for us automatically fetchRecipes().subscribe() ...
             return this.dataStorageService.fetchRecipes();
         }
         return recipes;
