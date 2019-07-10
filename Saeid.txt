@@ -1,3 +1,7 @@
+Install ngrx Devtools extension for google chrome:
+https://github.com/zalmoxisus/redux-devtools-extension
+$ npm install --save-dev @ngrx/store-devtools
+====================================================
 Inatal NgRx Effect:
 npm i --save @ngrx/effects
 ====================================================
