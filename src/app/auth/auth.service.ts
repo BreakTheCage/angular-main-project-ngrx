@@ -27,21 +27,21 @@ export class AuthService {
         private router: Router,
         private store: Store<fromApp.AppState>) {}
 
-    signup(email: string, password: string) {
-        return this.http.post<AuthResponseData>(
-            'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=' + environment.firebaseAPIKey ,
-            {
-                email: email,
-                password: password,
-                returnSecureToken: true
-            }
-        ).pipe(
-            catchError(this.handleError),
-            tap(resData => {
-                this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn)
-            })
-        );
-    }
+    // signup(email: string, password: string) {
+    //     return this.http.post<AuthResponseData>(
+    //         'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=' + environment.firebaseAPIKey ,
+    //         {
+    //             email: email,
+    //             password: password,
+    //             returnSecureToken: true
+    //         }
+    //     ).pipe(
+    //         catchError(this.handleError),
+    //         tap(resData => {
+    //             this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn)
+    //         })
+    //     );
+    // }
     autoLogin() {
         const userData: {
             email: string,
@@ -68,8 +68,7 @@ export class AuthService {
 
     logout() {
         // this.user.next(null);
-        this.store.dispatch(new AuthActions.Logout())
-        this.router.navigate(['/auth']);
+        this.store.dispatch(new AuthActions.Logout());
         localStorage.removeItem('userData');
         if(this.tokenExpitationTimer) {
             clearTimeout(this.tokenExpitationTimer);
@@ -108,20 +107,20 @@ export class AuthService {
     }
 
     //https://firebase.google.com/docs/reference/rest/auth#section-sign-in-email-password
-    login(email: string, password: string) {
-        return this.http.post<AuthResponseData>(
-            'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=' + environment.firebaseAPIKey,
-            { 
-                email: email,
-                password: password,
-                returnSecureToken: true
-            }
-        ).pipe(
-            catchError(this.handleError),
-            tap(resData => {
-                this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn)
-            }));
-    }
+    // login(email: string, password: string) {
+    //     return this.http.post<AuthResponseData>(
+    //         'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=' + environment.firebaseAPIKey,
+    //         { 
+    //             email: email,
+    //             password: password,
+    //             returnSecureToken: true
+    //         }
+    //     ).pipe(
+    //         catchError(this.handleError),
+    //         tap(resData => {
+    //             this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn)
+    //         }));
+    // }
 
     private handleError(errorRes: HttpErrorResponse) {   
         let errorMessage = 'An unknown error occurred!';

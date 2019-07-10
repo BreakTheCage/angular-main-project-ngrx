@@ -4,9 +4,10 @@ import { DataStorageService } from '../shared/data-storage.service';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
 
 import * as formApp from '../store/app.reducer';
-import { map } from 'rxjs/operators';
+import * as AuthActions from '../auth/store/auth.actions';
 
 @Component({
     selector: 'app-header',
@@ -39,7 +40,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.dataStorageService.fetchRecipes().subscribe();
     } 
     onLogout() {
-        this.authService.logout();
+        // this.authService.logout();
+        this.store.dispatch( new AuthActions.Logout());
     }
     ngOnDestroy(): void {
         this.userSub.unsubscribe();
