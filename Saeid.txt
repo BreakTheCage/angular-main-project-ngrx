@@ -1,3 +1,7 @@
+
+Install @ngrx/router-store
+$ npm install --save @ngrx/router-store
+====================================================
 Install ngrx Devtools extension for google chrome:
 https://github.com/zalmoxisus/redux-devtools-extension
 $ npm install --save-dev @ngrx/store-devtools
