@@ -7,24 +7,37 @@ import { Recipe } from '../recipe.model';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-@Injectable()
-export class RecipeEffects {
+//'https://ng-course-recipe-book-546b8.firebaseio.com/recipes.json'
+
+// let newRecipes: Recipe[];
+//             for(let i =0; i< recipes.length; ++i) {
+//                 newRecipes.push({
+//                     ...recipes[i],
+//                     ingredients: recipes[i].ingredients ? recipes[i].ingredients : []
+//                     })
+//             }
+//             return newRecipes;
+
+    @Injectable()
+    export class RecipeEffects {
     @Effect()
     fetchRecipes = this.actions$.pipe(
         ofType(RecipesActions.FETCH_RECIPES),
-        switchMap( () => {
-            return this.http.get<Recipe[]>(
-                'https://ng-course-recipe-book-546b8.firebaseio.com/recipes.json'
-            )
+        switchMap(() => {
+        return this.http.get<Recipe[]>(
+            'https://ng-course-recipe-book-546b8.firebaseio.com/recipes.json'
+        );
         }),
-        map((recipes: Recipe[]) => {
-            console.log('@Recipe Effect:=>', recipes);
-            return recipes.map(recipe => {
-                return {... recipe, ingredients: recipe.ingredients ? recipe.ingredients : []}
-            })
+        map(recipes => {
+        return recipes.map(recipe => {
+            return {
+            ...recipe,
+            ingredients: recipe.ingredients ? recipe.ingredients : []
+            };
+        });
         }),
-        map((recipes: Recipe[]) => {
-            return new RecipesActions.SetRecipes(recipes);
+        map(recipes => {
+        return new RecipesActions.SetRecipes(recipes);
         })
     );
 
@@ -35,7 +48,7 @@ export class RecipeEffects {
         switchMap( ([actionData, recipesState]) => {
             return this.http.put(
                 'https://ng-course-recipe-book-546b8.firebaseio.com/recipes.json',
-                recipesState
+                recipesState.recipes
              )
         }),
     );
